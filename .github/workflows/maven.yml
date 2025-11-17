@@ -1,0 +1,32 @@
+# .github/workflows/maven.yml
+name: GuiBuilder
+
+on:
+  push:
+    branches: [ "master", "main" ]
+  pull_request:
+    branches: [ "master", "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Check out the repository
+      - uses: actions/checkout@v4
+
+      # Set up JDK 21
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+          cache: maven
+
+      # Build project using Maven
+      - name: Build with Maven
+        run: mvn -B package --file pom.xml
+
+      # Optional: update dependency graph for Dependabot
+      - name: Update dependency graph
+        uses: advanced-security/maven-dependency-submission-action@v1
