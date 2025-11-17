@@ -67,11 +67,12 @@ public class ItemBuilder {
     }
 
     public GuiItem asGuiItem(Consumer<InventoryClickEvent> action) {
+        build();
         return new GuiItem(item, action);
     }
 
     public GuiItem asGuiItem() {
-        return new GuiItem(item);
+        return new GuiItem(build());
     }
 
     public ItemStack asItem() {

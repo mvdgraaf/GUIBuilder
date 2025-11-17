@@ -1,0 +1,5 @@
+name: GuiBuilder
+version: 0.1
+main: me.Codex.GUIBuilder.CodexGui
+api-version: 1.21
+author: Codex

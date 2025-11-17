@@ -12,7 +12,7 @@ public abstract class GuiBaseBuilder<T extends GuiBaseBuilder<T>> implements Gui
 
     protected Component title;
     protected InventoryType type = InventoryType.CHEST;
-    protected int size = 3;
+    protected int size = 9;
     protected Material fillMaterial = null;
 
     public static Map<Integer, GuiItem> items = new HashMap<>();
