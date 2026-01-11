@@ -35,6 +35,7 @@ public class ItemBuilder {
      * @param name The new name of the item. (may contain &-codes).
      * @return the ItemBuilder instance for chaining.
      */
+    @Deprecated
     public ItemBuilder SetName(String name) {
         Component displayName = SERIALIZER.deserialize(name);
         meta.displayName(displayName);
@@ -56,18 +57,13 @@ public class ItemBuilder {
     /**
      * Set the lore of the item.
      *
-     * @param lines the lines to use as a lore. (may contain &-codes and can accept Strings, Components, or mixed).
+     * @param lines the lines to use as lore. (may contain &-codes).
      * @return the ItemBuilder instance for chaining.
      */
-    public ItemBuilder setLore(Object... lines) {
+    @Deprecated
+    public ItemBuilder setLore(String... lines) {
         List<Component> lore = Arrays.stream(lines)
-                .map(line -> {
-                    if (line instanceof Component) {
-                        return (Component) line;
-                    } else {
-                        return SERIALIZER.deserialize(String.valueOf(line));
-                    }
-                })
+                .map(SERIALIZER::deserialize)
                 .collect(Collectors.toList());
         meta.lore(lore);
         return this;
@@ -76,7 +72,7 @@ public class ItemBuilder {
     /**
      * Set the lore of the item.
      *
-     * @param lines the Component(s) to use as a lore.
+     * @param lines The Component(s) to use as a lore.
      * @return the ItemBuilder instance for chaining.
      */
     public ItemBuilder setLore(Component... lines) {
