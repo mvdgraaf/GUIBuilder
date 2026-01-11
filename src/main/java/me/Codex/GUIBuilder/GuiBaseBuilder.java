@@ -15,7 +15,7 @@ public abstract class GuiBaseBuilder<T extends GuiBaseBuilder<T>> implements Gui
     protected int size = 9;
     protected Material fillMaterial = null;
 
-    public static Map<Integer, GuiItem> items = new HashMap<>();
+    public Map<Integer, GuiItem> items = new HashMap<>();
 
     public T title(String title) {
         this.title = Component.text(title);
@@ -46,7 +46,16 @@ public abstract class GuiBaseBuilder<T extends GuiBaseBuilder<T>> implements Gui
     }
 
     public T setItem(int slot, GuiItem item) {
-        items.put(slot, item);
+        if (item == null) {
+            items.remove(slot);
+        } else {
+            items.put(slot, item);
+        }
+        return (T) this;
+    }
+
+    public T removeItem(int slot) {
+        items.remove(slot);
         return (T) this;
     }
 

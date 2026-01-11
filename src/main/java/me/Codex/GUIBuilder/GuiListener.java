@@ -4,6 +4,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 
 import java.util.HashMap;
@@ -20,6 +21,12 @@ public class GuiListener implements Listener {
 
     public static void registerPaged(Inventory inventory, Map<Integer, GuiItem> items) {
         PagedGui.put(inventory, items);
+    }
+
+    @EventHandler
+    public void onInventoryClose(InventoryCloseEvent e) {
+        NormalGui.remove(e.getInventory());
+        PagedGui.remove(e.getInventory());
     }
 
     @EventHandler
