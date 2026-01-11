@@ -22,7 +22,7 @@ public class ItemBuilder {
     /**
      * Create a new ItemBuilder instance.
      *
-     * @param material The material of the item.
+     * @param material the material of the item.
      */
     public ItemBuilder(Material material) {
         this.item = new ItemStack(material);
@@ -33,7 +33,7 @@ public class ItemBuilder {
      * Set the display name of the item.
      *
      * @param name The new name of the item. (may contain &-codes).
-     * @return The ItemBuilder instance for chaining.
+     * @return the ItemBuilder instance for chaining.
      */
     public ItemBuilder SetName(String name) {
         Component displayName = SERIALIZER.deserialize(name);
@@ -46,13 +46,19 @@ public class ItemBuilder {
      * Set the display name of the item using a Component.
      *
      * @param name The Component to use as a display name.
-     * @return The ItemBuilder instance for chaining.
+     * @return the ItemBuilder instance for chaining.
      */
     public ItemBuilder SetName(Component name) {
         meta.displayName(name);
         return this;
     }
 
+    /**
+     * Set the lore of the item.
+     *
+     * @param lines The material of the item.
+     * @return the ItemBuilder instance for chaining.
+     */
     public ItemBuilder setLore(String... lines) {
         List<Component> lore = Arrays.stream(lines)
                 .map(SERIALIZER::deserialize)
@@ -66,6 +72,12 @@ public class ItemBuilder {
         return item;
     }
 
+    /**
+     * Builds the item and converts it into a {@link GuiItem}.
+     *
+     * @param action the action that will be executed when the item is clicked
+     * @return the built item wrapped as a {@link GuiItem} for use in a GUI
+     */
     public GuiItem asGuiItem(Consumer<InventoryClickEvent> action) {
         build();
         return new GuiItem(item, action);

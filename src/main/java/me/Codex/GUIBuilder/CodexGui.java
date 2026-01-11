@@ -7,11 +7,6 @@ public final class CodexGui extends JavaPlugin {
     @Override
     public void onEnable() {
         Bukkit.getPluginManager().registerEvents(new GuiListener(), this);
-        getLogger().info("CodexGui enabled!");
-    }
-
-    @Override
-    public void onDisable() {
-        // Nothing needed
+        getLogger().info("GUIBuilder enabled!");
     }
 }
