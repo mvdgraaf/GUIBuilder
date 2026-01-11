@@ -22,6 +22,11 @@ public abstract class GuiBaseBuilder<T extends GuiBaseBuilder<T>> implements Gui
         return (T) this;
     }
 
+    public T title(Component title){
+        this.title = title;
+        return (T) this;
+    }
+
     public T size(int size) {
         this.size = size;
         return (T) this;
