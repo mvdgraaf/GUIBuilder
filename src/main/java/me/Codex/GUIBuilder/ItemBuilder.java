@@ -56,14 +56,31 @@ public class ItemBuilder {
     /**
      * Set the lore of the item.
      *
-     * @param lines The material of the item.
+     * @param lines the lines to use as a lore. (may contain &-codes and can accept Strings, Components, or mixed).
      * @return the ItemBuilder instance for chaining.
      */
-    public ItemBuilder setLore(String... lines) {
+    public ItemBuilder setLore(Object... lines) {
         List<Component> lore = Arrays.stream(lines)
-                .map(SERIALIZER::deserialize)
+                .map(line -> {
+                    if (line instanceof Component) {
+                        return (Component) line;
+                    } else {
+                        return SERIALIZER.deserialize(String.valueOf(line));
+                    }
+                })
                 .collect(Collectors.toList());
         meta.lore(lore);
+        return this;
+    }
+
+    /**
+     * Set the lore of the item.
+     *
+     * @param lines the Component(s) to use as a lore.
+     * @return the ItemBuilder instance for chaining.
+     */
+    public ItemBuilder setLore(Component... lines) {
+        meta.lore(Arrays.asList(lines));
         return this;
     }
 

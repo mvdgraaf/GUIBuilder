@@ -6,7 +6,7 @@
 
     <groupId>me.Codex</groupId>
     <artifactId>guibuilder</artifactId>
-    <version>0.1.2</version>
+    <version>0.1.3</version>
     <packaging>jar</packaging>
 
     <name>guibuilder</name>
